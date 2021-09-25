@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 axios.defaults.params = {
   api_key: '81a241f12309c5e9ca28c72f9b2b35af',
 };
@@ -11,15 +11,23 @@ async function fetchMovies(url = '', config = {}) {
 }
 
 export function moviesTrending() {
-  return fetchMovies(`3/trending/movie/day?`);
+  return fetchMovies(`trending/movie/day?`);
 }
 
 export function moviesSearch(searchMovie) {
-  return fetchMovies(`3/search/movie?&query=${searchMovie}`);
+  return fetchMovies(`search/movie?&query=${searchMovie}`);
 }
 
 export function movieInfo(movieId) {
-  return fetchMovies(`3/movie/${movieId}`);
+  return fetchMovies(`movie/${movieId}`);
+}
+
+export function movieCast(movieId) {
+  return fetchMovies(`movie/${movieId}/credits`);
+}
+
+export function movieReviews(movieId) {
+  return fetchMovies(`movie/${movieId}/reviews`);
 }
 
 // поиск - https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false

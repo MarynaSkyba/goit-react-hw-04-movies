@@ -1,6 +1,9 @@
+import { lazy } from 'react';
 import { useEffect, useState } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
-import HomePageMovies from '../../components/HomePage/HomePageMovies';
+const HomePageMovies = lazy(() =>
+  import('../../components/HomePage/HomePageMovies' /* webpackChunkName: "HomePageMovies"  */),
+);
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
