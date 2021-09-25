@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { NavLink, useRouteMatch, Route, useParams } from 'react-router-dom';
 
 const MovieCastView = lazy(() =>
@@ -14,6 +14,7 @@ export default function MoviePageDetails({ movie }) {
 
   return (
     <div key={movie.id}>
+      <button>Go back</button>
       <h2>{movie.title}</h2>
       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title}></img>
       <h3>Genres:</h3>
@@ -27,14 +28,17 @@ export default function MoviePageDetails({ movie }) {
       <p>{movie.overview}</p>
 
       <NavLink to={`${url}/cast`}>Cast</NavLink>
-      <Route path={`${path}/cast`}>
-        <MovieCastView movieId={movieId} />
-      </Route>
-
       <NavLink to={`${url}/reviews`}>Reviews</NavLink>
-      <Route path={`${path}/reviews`}>
-        <MovieReviewsView movieId={movieId} />
-      </Route>
+
+      <Suspense fallback={<div>Download</div>}>
+        <Route path={`${path}/cast`}>
+          <MovieCastView movieId={movieId} />
+        </Route>
+
+        <Route path={`${path}/reviews`}>
+          <MovieReviewsView movieId={movieId} />
+        </Route>
+      </Suspense>
     </div>
   );
 }
