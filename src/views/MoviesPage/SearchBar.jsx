@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link, useRouteMatch } from 'react-router-dom';
 // import toast, { Toaster } from 'react-hot-toast';
 
 import SearchBarPage from '../../components/MoviesPage/SearchBarPage';
 
 export default function MoviesPage() {
+  const { url } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
   const [movies, setMovies] = useState([]);
@@ -41,7 +42,16 @@ export default function MoviesPage() {
       {movies && (
         <ul>
           {movies.map(movie => (
-            <li>{movie.title}</li>
+            <li key={movie.id}>
+              <Link
+                to={{
+                  pathname: `movies/${movie.id}`,
+                  state: { from: location, label: 'Back to trend movies' },
+                }}
+              >
+                {movie.title}
+              </Link>
+            </li>
           ))}
         </ul>
       )}
