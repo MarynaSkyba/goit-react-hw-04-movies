@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
 import { useHistory, useLocation } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
 
 import SearchBarPage from '../../components/MoviesPage/SearchBarPage';
 
@@ -12,17 +12,19 @@ export default function MoviesPage() {
   const [searchMovie, setSearchMovie] = useState('');
   console.log('Movie search -input all', movies);
 
-  const searchQuery = new URLSearchParams(location.search).get('query');
+  const searchQuery = new URLSearchParams(location.search).get('query') ?? '';
   console.log(searchQuery);
 
   useEffect(() => {
     if (!searchMovie) return;
     moviesAPI.moviesSearch(searchQuery).then(data => {
-      if (searchMovie.trim() === '' || movies.length === 0) {
-        return toast.error(`нет фильма с именем  ${searchMovie}`, setMovies([]));
+      if (data.results.length === 0) {
+        // searchMovie.trim() === '' ||
+        return `нет фильма с именем  ${searchMovie}`;
+        // toast.error
       }
       if (data.results) {
-        setMovies(data.results);
+        return setMovies(data.results);
       }
       setMovies(prevMovies => [...prevMovies, ...data.results]);
     });
