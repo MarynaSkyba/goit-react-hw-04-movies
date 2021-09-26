@@ -1,8 +1,13 @@
+import { lazy } from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as moviesAPI from '../../services/moviesApi';
-import MoviePageDetails from '../../components/MoviesPage/MoviePageDetails';
 
+const MoviePageDetails = lazy(() =>
+  import(
+    '../../components/MoviesPage/MoviePageDetails' /* webpackChunkName: "MoviePageDetails"  */
+  ),
+);
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);

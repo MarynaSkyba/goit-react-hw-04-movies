@@ -1,9 +1,5 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import Navigation from './components/Navigation/Navigation';
-// import HomePage from './views/HomePage/HomePage';
-// import MoviesPage from './views/MoviesPage/MoviesPageSearch';
-// import MovieDetails from './views/MoviesPage/MovieDetails';
 
 const Navigation = lazy(() =>
   import('./components/Navigation/Navigation' /* webpackChunkName: "Navigation"  */),
@@ -11,8 +7,8 @@ const Navigation = lazy(() =>
 const HomePage = lazy(() =>
   import('./views/HomePage/HomePage' /* webpackChunkName: "home-page"  */),
 );
-const MoviesPage = lazy(() =>
-  import('./views/MoviesPage/MoviesPageSearch' /* webpackChunkName: "movies-page"  */),
+const SearchBar = lazy(() =>
+  import('./views/MoviesPage/SearchBar' /* webpackChunkName: "search-bar"  */),
 );
 const MovieDetails = lazy(() =>
   import('./views/MoviesPage/MovieDetails' /* webpackChunkName: "movie-details"  */),
@@ -33,7 +29,7 @@ function App() {
           </Route>
 
           <Route path="/movies">
-            <MoviesPage />
+            <SearchBar />
           </Route>
         </Switch>
       </Suspense>

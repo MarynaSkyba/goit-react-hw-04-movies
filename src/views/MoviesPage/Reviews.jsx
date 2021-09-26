@@ -3,6 +3,7 @@ import * as moviesAPI from '../../services/moviesApi';
 
 export default function MovieReviewsView({ movieId }) {
   const [reviews, setReviews] = useState(null);
+
   useEffect(() => {
     moviesAPI.movieReviews(movieId).then(data => setReviews(data.results));
   }, [movieId]);
