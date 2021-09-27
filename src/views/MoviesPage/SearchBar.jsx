@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
 import { useHistory, useLocation, Link, useRouteMatch } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import SearchBarPage from '../../components/MoviesPage/SearchBarPage';
+const SearchBarPage = lazy(() =>
+  import('../../components/MoviesPage/SearchBarPage' /* webpackChunkName: "SearchBarPage"  */),
+);
 
 export default function MoviesPage() {
   const { url } = useRouteMatch();
@@ -15,13 +17,12 @@ export default function MoviesPage() {
   const [searchMovie, setSearchMovie] = useState('');
 
   const searchQuery = new URLSearchParams(location.search).get('query') ?? '';
-  // const searchPage = new URLSearchParams(location.search).get('page') ?? '';
+
   useEffect(() => {
     if (!searchMovie) return;
     moviesAPI.moviesSearch(searchQuery, page).then(data => {
       console.log('data length', data.results.length);
       if (searchMovie.trim() === '' || data.results.length === 0) {
-        // searchMovie.trim() === '' ||
         return toast.error(`Sorry there are no movies with ${searchMovie} name`, setMovies([]));
       }
       if (data.results) {
