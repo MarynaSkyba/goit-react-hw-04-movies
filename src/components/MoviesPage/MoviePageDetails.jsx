@@ -16,7 +16,7 @@ const Reviews = lazy(() =>
 export default function MoviePageDetails({ movie }) {
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
+  console.log('MoviePageDetails', location);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
 

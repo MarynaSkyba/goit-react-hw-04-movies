@@ -10,7 +10,6 @@ export default function HomePage() {
 
   useEffect(() => {
     moviesAPI.moviesTrending().then(data => {
-      console.log('home page', data.results);
       setMovies(data.results);
     });
   }, []);

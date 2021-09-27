@@ -1,8 +1,8 @@
 const SearchBarPage = ({ onSubmit }) => {
-  console.log('search movie render', onSubmit);
   const handleSearch = e => {
     e.preventDefault();
     onSubmit(e.target.elements.searchMovie.value.toLowerCase());
+    e.target.reset();
   };
 
   return (

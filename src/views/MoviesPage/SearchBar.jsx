@@ -9,12 +9,11 @@ export default function MoviesPage() {
   const { url } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
+  console.log('searchbar Location', location);
   const [movies, setMovies] = useState([]);
   const [searchMovie, setSearchMovie] = useState('');
-  console.log('Movie search -input all', movies);
 
   const searchQuery = new URLSearchParams(location.search).get('query') ?? '';
-  console.log(searchQuery);
 
   useEffect(() => {
     if (!searchMovie) return;
@@ -45,8 +44,14 @@ export default function MoviesPage() {
             <li key={movie.id}>
               <Link
                 to={{
-                  pathname: `movies/${movie.id}`,
-                  state: { from: location, label: 'Back to trend movies' },
+                  pathname: `${url}/${movie.id}`,
+                  state: {
+                    from: {
+                      location,
+                      label: 'Back to search movies',
+                      search: `?query=${searchMovie}`,
+                    },
+                  },
                 }}
               >
                 {movie.title}
