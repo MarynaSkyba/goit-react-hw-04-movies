@@ -13,16 +13,13 @@ export default function MoviesPage() {
   const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  console.log('page', page);
   const [searchMovie, setSearchMovie] = useState('');
-
   const searchQuery = new URLSearchParams(location.search).get('query') ?? '';
 
   useEffect(() => {
-    if (!searchMovie) return;
+    if (!searchQuery) return;
     moviesAPI.moviesSearch(searchQuery, page).then(data => {
-      console.log('data length', data.results.length);
-      if (searchMovie.trim() === '' || data.results.length === 0) {
+      if (data.results.length === 0) {
         return toast.error(`Sorry there are no movies with ${searchMovie} name`, setMovies([]));
       }
       if (data.results) {

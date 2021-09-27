@@ -14,6 +14,10 @@ const MovieDetails = lazy(() =>
   import('./views/MoviesPage/MovieDetails' /* webpackChunkName: "movie-details"  */),
 );
 
+const NotFoundViews = lazy(() =>
+  import('./views/NotFoundViews' /* webpackChunkName: "NotFoundViews"  */),
+);
+
 function App() {
   return (
     <div>
@@ -30,6 +34,9 @@ function App() {
 
           <Route path="/movies">
             <SearchBar />
+          </Route>
+          <Route>
+            <NotFoundViews />
           </Route>
         </Switch>
       </Suspense>
