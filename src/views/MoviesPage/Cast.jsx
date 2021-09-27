@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLocation } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
 
 export default function MovieCastView({ movieId }) {
+  // console.log('cast location',location)
   const [casts, setCasts] = useState(null);
-  console.log('MovieCastView', casts);
   useEffect(() => {
     moviesAPI.movieCast(movieId).then(data => setCasts(data.cast));
   }, []);

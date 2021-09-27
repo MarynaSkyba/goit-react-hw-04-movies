@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import {
+  Link,
   NavLink,
   useRouteMatch,
   Route,
@@ -42,8 +43,22 @@ export default function MoviePageDetails({ movie }) {
       <h3>Description:</h3>
       <p>{movie.overview}</p>
 
-      <NavLink to={`${url}/cast`}>Cast</NavLink>
-      <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+      <NavLink
+        to={{
+          pathname: `${url}/cast`,
+          state: { from: location.state.from },
+        }}
+      >
+        Cast
+      </NavLink>
+      <NavLink
+        to={{
+          pathname: `${url}/reviews`,
+          state: { from: location.state.from },
+        }}
+      >
+        Reviews
+      </NavLink>
 
       <Suspense fallback={<div>Download</div>}>
         <Route path={`${path}/cast`}>
