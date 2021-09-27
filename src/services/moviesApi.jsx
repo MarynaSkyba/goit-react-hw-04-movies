@@ -14,8 +14,8 @@ export function moviesTrending() {
   return fetchMovies(`trending/movie/day?`);
 }
 
-export function moviesSearch(searchMovie) {
-  return fetchMovies(`search/movie?&query=${searchMovie}`);
+export function moviesSearch(searchMovie, page) {
+  return fetchMovies(`search/movie?&query=${searchMovie}&page=${page}`);
 }
 
 export function movieInfo(movieId) {

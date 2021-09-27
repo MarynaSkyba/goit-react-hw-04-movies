@@ -1,7 +1,13 @@
-const SearchBarPage = ({ onSubmit }) => {
+import toast from 'react-hot-toast';
+
+export default function SearchBarPage({ onSubmit }) {
   const handleSearch = e => {
     e.preventDefault();
-    onSubmit(e.target.elements.searchMovie.value.toLowerCase());
+    const target = e.target.elements.searchMovie.value.toLowerCase();
+    if (target.trim() === '') {
+      return toast.error('The search field is empty!');
+    }
+    onSubmit(target);
     e.target.reset();
   };
 
@@ -21,6 +27,4 @@ const SearchBarPage = ({ onSubmit }) => {
       </form>
     </div>
   );
-};
-
-export default SearchBarPage;
+}

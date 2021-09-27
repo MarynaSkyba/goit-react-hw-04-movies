@@ -27,7 +27,7 @@ export default function MoviePageDetails({ movie }) {
   return (
     <div key={movie.id}>
       <button type="button" onClick={onGoBack}>
-        {location?.state?.from?.label ?? 'Go back'}
+        {location?.state?.from?.label ?? 'Go back to main page'}
       </button>
 
       <h2>{movie.title}</h2>

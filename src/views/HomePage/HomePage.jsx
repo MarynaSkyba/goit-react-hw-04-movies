@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { useEffect, useState } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
+
 const HomePageMovies = lazy(() =>
   import('../../components/HomePage/HomePageMovies' /* webpackChunkName: "HomePageMovies"  */),
 );

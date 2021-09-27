@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as moviesAPI from '../../services/moviesApi';
 import { useHistory, useLocation, Link, useRouteMatch } from 'react-router-dom';
-// import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import SearchBarPage from '../../components/MoviesPage/SearchBarPage';
 
@@ -9,32 +9,39 @@ export default function MoviesPage() {
   const { url } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
-  console.log('searchbar Location', location);
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  console.log('page', page);
   const [searchMovie, setSearchMovie] = useState('');
 
   const searchQuery = new URLSearchParams(location.search).get('query') ?? '';
-
+  // const searchPage = new URLSearchParams(location.search).get('page') ?? '';
   useEffect(() => {
     if (!searchMovie) return;
-    moviesAPI.moviesSearch(searchQuery).then(data => {
-      if (data.results.length === 0) {
+    moviesAPI.moviesSearch(searchQuery, page).then(data => {
+      console.log('data length', data.results.length);
+      if (searchMovie.trim() === '' || data.results.length === 0) {
         // searchMovie.trim() === '' ||
-        return `нет фильма с именем  ${searchMovie}`;
-        // toast.error
+        return toast.error(`Sorry there are no movies with ${searchMovie} name`, setMovies([]));
       }
       if (data.results) {
-        return setMovies(data.results);
+        return setMovies(prevMovies => [...prevMovies, ...data.results]);
       }
-      setMovies(prevMovies => [...prevMovies, ...data.results]);
     });
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   const handleFormSubmit = searchMovie => {
+    setMovies([]);
     setSearchMovie(searchMovie);
+    setPage(1);
     history.push({ ...location, search: `query=${searchMovie}` });
   };
 
+  const handleButtonLoadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const showButton = movies.length >= 20;
   return (
     <div>
       <SearchBarPage onSubmit={handleFormSubmit} />
@@ -58,6 +65,7 @@ export default function MoviesPage() {
               </Link>
             </li>
           ))}
+          {showButton && <button onClick={handleButtonLoadMore}>Load more</button>}
         </ul>
       )}
     </div>
