@@ -8,6 +8,7 @@ const HomePageMovies = lazy(() =>
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
+  console.log(movies);
 
   useEffect(() => {
     moviesAPI.moviesTrending().then(data => {

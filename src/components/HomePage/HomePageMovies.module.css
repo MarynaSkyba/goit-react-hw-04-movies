@@ -29,6 +29,7 @@
   border: 1px solid #a52a62;
   opacity: 0.75;
   transition: opacity 0.5s;
+  cursor: pointer;
 }
 
 .li:hover {

@@ -21,8 +21,8 @@ function App() {
       <Suspense
         fallback={
           <Loader
-            type="Puff"
-            color="#00BFFF"
+            type="Hearts"
+            color="#a52a62"
             height={200}
             width={200}
             timeout={3000} //3 secs
