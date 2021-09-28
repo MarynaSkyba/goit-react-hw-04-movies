@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as moviesAPI from '../services/moviesApi';
+import styles from './Reviews.module.css';
 
 export default function MovieReviewsView({ movieId }) {
   const [reviews, setReviews] = useState(null);
@@ -10,12 +11,12 @@ export default function MovieReviewsView({ movieId }) {
 
   return (
     <>
-      <ul>
+      <ul className={styles.ul}>
         {reviews && reviews.length > 0
           ? reviews.map(review => (
-              <li>
-                <h3>{review.author}</h3>
-                <p>{review.content}</p>
+              <li className={styles.li}>
+                <h3 className={styles.h3}>{review.author}</h3>
+                <p className={styles.p}>{review.content}</p>
               </li>
             ))
           : 'No reviews'}
