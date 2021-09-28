@@ -21,7 +21,7 @@ export default function SearchBarPage({ onSubmit }) {
           name="searchMovie"
           autoComplete="off"
           autoFocus
-          placeholder="Search Movies and photos"
+          placeholder="Search Movies"
         />
         <button className={styles.button} type="submit">
           <span className={styles.span}>Search</span>

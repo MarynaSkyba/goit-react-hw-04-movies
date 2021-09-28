@@ -1,7 +1,10 @@
 import { useState, useEffect, lazy } from 'react';
 import * as moviesAPI from '../services/moviesApi';
-import { useHistory, useLocation, Link, useRouteMatch } from 'react-router-dom';
+import { useHistory, useLocation, NavLink, useRouteMatch } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+// import stysles from './views/SearchBar.module.css'
+// import styles from './SearchBar.module.css';
+import styles from '../components/HomePage/HomePageMovies.module.css';
 
 const SearchBarPage = lazy(() =>
   import('../components/SearchBarPage' /* webpackChunkName: "SearchBarPage"  */),
@@ -26,7 +29,7 @@ export default function MoviesPage() {
         return setMovies(prevMovies => [...prevMovies, ...data.results]);
       }
     });
-  }, [searchQuery, page]);
+  }, [searchQuery, page, searchMovie]);
 
   const handleFormSubmit = searchMovie => {
     setMovies([]);
@@ -41,30 +44,42 @@ export default function MoviesPage() {
 
   const showButton = movies.length >= 20;
   return (
-    <div>
+    <div className={styles.div}>
       <SearchBarPage onSubmit={handleFormSubmit} />
       {movies && (
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link
-                to={{
-                  pathname: `${url}/${movie.id}`,
-                  state: {
-                    from: {
-                      location,
-                      label: 'Back to search movies',
-                      search: `?query=${searchMovie}`,
+        <>
+          <ul className={styles.ul}>
+            {movies.map(movie => (
+              <li key={movie.id} className={styles.li}>
+                <NavLink
+                  className={styles.link}
+                  to={{
+                    pathname: `${url}/${movie.id}`,
+                    state: {
+                      from: {
+                        location,
+                        label: 'Back to search movies',
+                        search: `?query=${searchMovie}`,
+                      },
                     },
-                  },
-                }}
-              >
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-          {showButton && <button onClick={handleButtonLoadMore}>Load more</button>}
-        </ul>
+                  }}
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    className={styles.img}
+                  ></img>
+                  <p className={styles.p}>{movie.title}</p>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          {showButton && (
+            <button onClick={handleButtonLoadMore} className={styles.button}>
+              Load more
+            </button>
+          )}
+        </>
       )}
       <Toaster />
     </div>

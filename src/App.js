@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
+// import styles from './MoviePage/MoviePageDetails.module.css';
 
 const Navigation = lazy(() =>
   import('./components/Navigation/Navigation' /* webpackChunkName: "Navigation"  */),
@@ -19,7 +20,18 @@ function App() {
   return (
     <div>
       <Suspense
-        fallback={<Loader type="Hearts" color="#a52a62" height={200} width={200} timeout={3000} />}
+        fallback={
+          <Loader
+            type="Hearts"
+            color="#a52a62"
+            height={200}
+            width={200}
+            timeout={3000}
+            display="flex"
+            justify-content="center"
+            // className={styles.loader}
+          />
+        }
       >
         <Navigation />
         <Switch>

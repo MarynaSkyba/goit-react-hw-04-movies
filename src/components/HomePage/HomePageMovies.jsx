@@ -1,9 +1,8 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './HomePageMovies.module.css';
 
 const HomePageMovies = ({ movies }) => {
   const location = useLocation();
-  console.log('homepage Location', location);
 
   return (
     <div className={styles.div}>
@@ -11,8 +10,8 @@ const HomePageMovies = ({ movies }) => {
       <ul className={styles.ul}>
         {movies.map(movie => (
           <li key={movie.id} className={styles.li}>
-            <Link
-              className={styles.a}
+            <NavLink
+              className={styles.link}
               to={{
                 pathname: `movies/${movie.id}`,
                 state: { from: { location, label: 'Back to trend movies' } },
@@ -24,7 +23,7 @@ const HomePageMovies = ({ movies }) => {
                 className={styles.img}
               ></img>
               <p className={styles.p}>{movie.title}</p>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

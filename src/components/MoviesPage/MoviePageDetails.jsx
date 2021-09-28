@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import {
-  Link,
   NavLink,
   useRouteMatch,
   Route,
@@ -17,7 +16,6 @@ const Reviews = lazy(() => import('../../views/Reviews' /* webpackChunkName: "re
 export default function MoviePageDetails({ movie }) {
   const history = useHistory();
   const location = useLocation();
-  console.log('MoviePageDetails', location);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
 
@@ -44,7 +42,7 @@ export default function MoviePageDetails({ movie }) {
             <p className={styles.p}> {movie.release_date}</p>
             {movie.genres.map(genre => (
               <ul className={styles.li}>
-                <li>{genre.name}</li>
+                <li key={genre.id}>{genre.name}</li>
               </ul>
             ))}
 
@@ -74,7 +72,16 @@ export default function MoviePageDetails({ movie }) {
         </div>
       </div>
       <Suspense
-        fallback={<Loader type="Hearts" color="#a52a62" height={200} width={200} timeout={3000} />}
+        fallback={
+          <Loader
+            type="Hearts"
+            color="#a52a62"
+            height={200}
+            width={200}
+            timeout={3000}
+            className={styles.loader}
+          />
+        }
       >
         <Route path={`${path}/cast`}>
           <Cast movieId={movieId} />

@@ -51,3 +51,24 @@
   font-size: 18px;
   padding: 5px;
 }
+
+.link {
+  text-decoration: none;
+}
+
+.button {
+  display: block;
+  margin: 20px auto;
+  border: none;
+  padding: 20px;
+  font-size: 20px;
+  color: black;
+  width: 400px;
+  text-align: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: #a52a62;
+}

@@ -14,7 +14,7 @@ export default function MovieReviewsView({ movieId }) {
       <ul className={styles.ul}>
         {reviews && reviews.length > 0
           ? reviews.map(review => (
-              <li className={styles.li}>
+              <li key={review.id} className={styles.li}>
                 <h3 className={styles.h3}>{review.author}</h3>
                 <p className={styles.p}>{review.content}</p>
               </li>
