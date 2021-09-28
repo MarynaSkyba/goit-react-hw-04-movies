@@ -19,15 +19,7 @@ function App() {
   return (
     <div>
       <Suspense
-        fallback={
-          <Loader
-            type="Hearts"
-            color="#a52a62"
-            height={200}
-            width={200}
-            timeout={3000} //3 secs
-          />
-        }
+        fallback={<Loader type="Hearts" color="#a52a62" height={200} width={200} timeout={3000} />}
       >
         <Navigation />
         <Switch>

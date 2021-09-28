@@ -9,6 +9,7 @@ import {
   useHistory,
 } from 'react-router-dom';
 import styles from './MoviePageDetails.module.css';
+import Loader from 'react-loader-spinner';
 
 const Cast = lazy(() => import('../../views/Cast' /* webpackChunkName: "cast"  */));
 const Reviews = lazy(() => import('../../views/Reviews' /* webpackChunkName: "reviews"  */));
@@ -72,7 +73,9 @@ export default function MoviePageDetails({ movie }) {
           </div>
         </div>
       </div>
-      <Suspense fallback={<div>Download</div>}>
+      <Suspense
+        fallback={<Loader type="Hearts" color="#a52a62" height={200} width={200} timeout={3000} />}
+      >
         <Route path={`${path}/cast`}>
           <Cast movieId={movieId} />
         </Route>
