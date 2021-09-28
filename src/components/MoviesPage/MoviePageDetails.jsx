@@ -31,57 +31,56 @@ export default function MoviePageDetails({ movie }) {
       </button>
 
       <div key={movie.id} className={styles.div}>
-        <div className={styles.movie_left}>
+        <div className={styles.movie_card}>
           <img
             className={styles.img}
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt={movie.title}
           ></img>
-        </div>
 
-        <div className={styles.movie_rigth}>
-          <h2 className={styles.h2}>{movie.title}</h2>
-          <p className={styles.p}> {movie.release_date}</p>
-          {movie.genres.map(genre => (
-            <ul className={styles.li}>
-              <li>{genre.name}</li>
-            </ul>
-          ))}
+          <div className={styles.movie_info}>
+            <h2 className={styles.h2}>{movie.title}</h2>
+            <p className={styles.p}> {movie.release_date}</p>
+            {movie.genres.map(genre => (
+              <ul className={styles.li}>
+                <li>{genre.name}</li>
+              </ul>
+            ))}
 
-          <p className={styles.p}>{movie.overview}</p>
+            <p className={styles.p}>{movie.overview}</p>
 
-          <div className={styles.links}>
-            <NavLink
-              className={styles.link}
-              to={{
-                pathname: `${url}/cast`,
-                state: { from: location.state.from },
-              }}
-            >
-              Cast
-            </NavLink>
-            <NavLink
-              className={styles.link}
-              to={{
-                pathname: `${url}/reviews`,
-                state: { from: location.state.from },
-              }}
-            >
-              Reviews
-            </NavLink>
-
-            <Suspense fallback={<div>Download</div>}>
-              <Route path={`${path}/cast`}>
-                <Cast movieId={movieId} />
-              </Route>
-
-              <Route path={`${path}/reviews`}>
-                <Reviews movieId={movieId} />
-              </Route>
-            </Suspense>
+            <div className={styles.links}>
+              <NavLink
+                className={styles.link}
+                to={{
+                  pathname: `${url}/cast`,
+                  state: { from: location.state.from },
+                }}
+              >
+                Cast
+              </NavLink>
+              <NavLink
+                className={styles.link}
+                to={{
+                  pathname: `${url}/reviews`,
+                  state: { from: location.state.from },
+                }}
+              >
+                Reviews
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>
+      <Suspense fallback={<div>Download</div>}>
+        <Route path={`${path}/cast`}>
+          <Cast movieId={movieId} />
+        </Route>
+
+        <Route path={`${path}/reviews`}>
+          <Reviews movieId={movieId} />
+        </Route>
+      </Suspense>
     </div>
   );
 }
