@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { useEffect, useState } from 'react';
-import * as moviesAPI from '../../services/moviesApi';
+import * as moviesAPI from '../services/moviesApi';
 
 const HomePageMovies = lazy(() =>
-  import('../../components/HomePageMovies' /* webpackChunkName: "HomePageMovies"  */),
+  import('../components/HomePage/HomePageMovies' /* webpackChunkName: "HomePageMovies"  */),
 );
 
 export default function HomePage() {
@@ -15,10 +15,5 @@ export default function HomePage() {
     });
   }, []);
 
-  return (
-    <>
-      <h1> Trending today </h1>
-      {movies && <HomePageMovies movies={movies} />}
-    </>
-  );
+  return <>{movies && <HomePageMovies movies={movies} />}</>;
 }

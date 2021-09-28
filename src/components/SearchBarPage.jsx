@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function SearchBarPage({ onSubmit }) {
   const handleSearch = e => {
@@ -25,6 +25,7 @@ export default function SearchBarPage({ onSubmit }) {
           <span>Search</span>
         </button>
       </form>
+      <Toaster />
     </div>
   );
 }

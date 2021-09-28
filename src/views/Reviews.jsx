@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import * as moviesAPI from '../../services/moviesApi';
+import * as moviesAPI from '../services/moviesApi';
 
 export default function MovieReviewsView({ movieId }) {
   const [reviews, setReviews] = useState(null);
@@ -11,13 +11,14 @@ export default function MovieReviewsView({ movieId }) {
   return (
     <>
       <ul>
-        {reviews &&
-          reviews.map(review => (
-            <li>
-              <h3>{review.author}</h3>
-              <p>{review.content}</p>
-            </li>
-          ))}
+        {reviews && reviews.length > 0
+          ? reviews.map(review => (
+              <li>
+                <h3>{review.author}</h3>
+                <p>{review.content}</p>
+              </li>
+            ))
+          : 'No reviews'}
       </ul>
     </>
   );

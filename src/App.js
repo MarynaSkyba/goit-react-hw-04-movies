@@ -1,17 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 const Navigation = lazy(() =>
   import('./components/Navigation/Navigation' /* webpackChunkName: "Navigation"  */),
 );
-const HomePage = lazy(() =>
-  import('./views/HomePage/HomePage' /* webpackChunkName: "home-page"  */),
-);
-const SearchBar = lazy(() =>
-  import('./views/MoviesPage/SearchBar' /* webpackChunkName: "search-bar"  */),
-);
+const HomePage = lazy(() => import('./views/HomePage' /* webpackChunkName: "home-page"  */));
+const SearchBar = lazy(() => import('./views/SearchBar' /* webpackChunkName: "search-bar"  */));
 const MovieDetails = lazy(() =>
-  import('./views/MoviesPage/MovieDetails' /* webpackChunkName: "movie-details"  */),
+  import('./views/MovieDetails' /* webpackChunkName: "movie-details"  */),
 );
 
 const NotFoundViews = lazy(() =>
@@ -21,7 +18,17 @@ const NotFoundViews = lazy(() =>
 function App() {
   return (
     <div>
-      <Suspense fallback={<div>Download</div>}>
+      <Suspense
+        fallback={
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={200}
+            width={200}
+            timeout={3000} //3 secs
+          />
+        }
+      >
         <Navigation />
         <Switch>
           <Route path="/" exact>
@@ -45,11 +52,3 @@ function App() {
 }
 
 export default App;
-
-// В приложении должны быть следующие маршруты. Если пользователь зашел по несуществующему маршруту, его необходимо перенаправлять на домашнюю страницу.
-
-// '/' - компонент <HomePage>, домашняя страница со списком популярных кинофильмов.
-// '/movies' - компонент <MoviesPage>, страница поиска фильмов по ключевому слову.
-// '/movies/:movieId' - компонент <MovieDetailsPage>, страница с детальной информацией о кинофильме.
-// /movies/:movieId/cast - компонент <Cast>, информация о актерском составе. Рендерится на странице <MovieDetailsPage>.
-// /movies/:movieId/reviews - компонент <Reviews>, информация об обзорах. Рендерится на странице <MovieDetailsPage>.

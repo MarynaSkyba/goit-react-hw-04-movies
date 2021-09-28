@@ -1,5 +1,5 @@
 import { useState, useEffect, useLocation } from 'react';
-import * as moviesAPI from '../../services/moviesApi';
+import * as moviesAPI from '../services/moviesApi';
 
 export default function MovieCastView({ movieId }) {
   // console.log('cast location',location)

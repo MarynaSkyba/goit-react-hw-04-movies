@@ -9,10 +9,8 @@ import {
   useHistory,
 } from 'react-router-dom';
 
-const Cast = lazy(() => import('../../views/MoviesPage/Cast' /* webpackChunkName: "cast"  */));
-const Reviews = lazy(() =>
-  import('../../views/MoviesPage/Reviews' /* webpackChunkName: "reviews"  */),
-);
+const Cast = lazy(() => import('../../views/Cast' /* webpackChunkName: "cast"  */));
+const Reviews = lazy(() => import('../../views/Reviews' /* webpackChunkName: "reviews"  */));
 
 export default function MoviePageDetails({ movie }) {
   const history = useHistory();

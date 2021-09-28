@@ -1,10 +1,10 @@
 import { useState, useEffect, lazy } from 'react';
-import * as moviesAPI from '../../services/moviesApi';
+import * as moviesAPI from '../services/moviesApi';
 import { useHistory, useLocation, Link, useRouteMatch } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SearchBarPage = lazy(() =>
-  import('../../components/MoviesPage/SearchBarPage' /* webpackChunkName: "SearchBarPage"  */),
+  import('../components/SearchBarPage' /* webpackChunkName: "SearchBarPage"  */),
 );
 
 export default function MoviesPage() {
@@ -66,6 +66,7 @@ export default function MoviesPage() {
           {showButton && <button onClick={handleButtonLoadMore}>Load more</button>}
         </ul>
       )}
+      <Toaster />
     </div>
   );
 }
