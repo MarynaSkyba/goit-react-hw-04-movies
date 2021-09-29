@@ -6,9 +6,11 @@ import * as moviesAPI from '../services/moviesApi';
 const MoviePageDetails = lazy(() =>
   import('../components/MoviesPage/MoviePageDetails' /* webpackChunkName: "MoviePageDetails"  */),
 );
+
 export default function MovieDetails() {
-  const { movieId } = useParams();
+  const { slug } = useParams();
   const [movie, setMovie] = useState(null);
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
 
   useEffect(() => {
     moviesAPI.movieInfo(movieId).then(setMovie);

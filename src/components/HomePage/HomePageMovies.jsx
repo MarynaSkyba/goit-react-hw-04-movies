@@ -1,5 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import slugify from 'slugify';
 import styles from './HomePageMovies.module.css';
+
+const makeSlug = string => slugify(string, { lower: true });
 
 const HomePageMovies = ({ movies }) => {
   const location = useLocation();
@@ -13,7 +16,7 @@ const HomePageMovies = ({ movies }) => {
             <NavLink
               className={styles.link}
               to={{
-                pathname: `movies/${movie.id}`,
+                pathname: `movies/${makeSlug(`${movie.title} ${movie.id}`)}`,
                 state: { from: { location, label: 'Back to trend movies' } },
               }}
             >

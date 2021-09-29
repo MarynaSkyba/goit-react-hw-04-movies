@@ -72,3 +72,11 @@
 .button:hover {
   color: #a52a62;
 }
+
+.loader {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}

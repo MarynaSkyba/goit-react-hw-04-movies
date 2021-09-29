@@ -1,14 +1,15 @@
 import { useState, useEffect, lazy } from 'react';
 import * as moviesAPI from '../services/moviesApi';
 import { useHistory, useLocation, NavLink, useRouteMatch } from 'react-router-dom';
+import slugify from 'slugify';
+import Loader from 'react-loader-spinner';
 import toast, { Toaster } from 'react-hot-toast';
-// import stysles from './views/SearchBar.module.css'
-// import styles from './SearchBar.module.css';
 import styles from '../components/HomePage/HomePageMovies.module.css';
 
 const SearchBarPage = lazy(() =>
   import('../components/SearchBarPage' /* webpackChunkName: "SearchBarPage"  */),
 );
+const makeSlug = string => slugify(string, { lower: true });
 
 export default function MoviesPage() {
   const { url } = useRouteMatch();
@@ -54,7 +55,7 @@ export default function MoviesPage() {
                 <NavLink
                   className={styles.link}
                   to={{
-                    pathname: `${url}/${movie.id}`,
+                    pathname: `${url}/${makeSlug(`${movie.title} ${movie.id}`)}`,
                     state: {
                       from: {
                         location,

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-// import styles from './MoviePage/MoviePageDetails.module.css';
+import styles from './components/MoviesPage/MoviePageDetails.module.css';
 
 const Navigation = lazy(() =>
   import('./components/Navigation/Navigation' /* webpackChunkName: "Navigation"  */),
@@ -29,7 +29,7 @@ function App() {
             timeout={3000}
             display="flex"
             justify-content="center"
-            // className={styles.loader}
+            className={styles.loader}
           />
         }
       >
@@ -39,7 +39,7 @@ function App() {
             <HomePage />
           </Route>
 
-          <Route path="/movies/:movieId">
+          <Route path="/movies/:slug">
             <MovieDetails />
           </Route>
 

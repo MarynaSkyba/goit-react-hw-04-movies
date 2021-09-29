@@ -16,8 +16,11 @@ const Reviews = lazy(() => import('../../views/Reviews' /* webpackChunkName: "re
 export default function MoviePageDetails({ movie }) {
   const history = useHistory();
   const location = useLocation();
-  const { movieId } = useParams();
+  const { slug } = useParams();
   const { url, path } = useRouteMatch();
+
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
+  console.log(slug);
 
   const onGoBack = () => {
     history.push(location?.state?.from?.location ?? '/');
@@ -78,7 +81,7 @@ export default function MoviePageDetails({ movie }) {
             color="#a52a62"
             height={200}
             width={200}
-            timeout={3000}
+            timeout={5000}
             className={styles.loader}
           />
         }
