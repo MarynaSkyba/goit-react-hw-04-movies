@@ -2,7 +2,6 @@ import { useState, useEffect, lazy } from 'react';
 import * as moviesAPI from '../services/moviesApi';
 import { useHistory, useLocation, NavLink, useRouteMatch } from 'react-router-dom';
 import slugify from 'slugify';
-import Loader from 'react-loader-spinner';
 import toast, { Toaster } from 'react-hot-toast';
 import styles from '../components/HomePage/HomePageMovies.module.css';
 
@@ -69,7 +68,7 @@ export default function MoviesPage() {
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={movie.title}
                     className={styles.img}
-                  ></img>
+                  />
                   <p className={styles.p}>{movie.title}</p>
                 </NavLink>
               </li>

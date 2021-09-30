@@ -35,20 +35,10 @@ function App() {
       >
         <Navigation />
         <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-
-          <Route path="/movies/:slug">
-            <MovieDetails />
-          </Route>
-
-          <Route path="/movies">
-            <SearchBar />
-          </Route>
-          <Route>
-            <NotFoundViews />
-          </Route>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/movies/:slug" component={MovieDetails} />
+          <Route path="/movies" component={SearchBar} />
+          <Route component={NotFoundViews} />
         </Switch>
       </Suspense>
     </div>

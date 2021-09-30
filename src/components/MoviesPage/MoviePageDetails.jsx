@@ -20,34 +20,39 @@ export default function MoviePageDetails({ movie }) {
   const { url, path } = useRouteMatch();
 
   const movieId = slug.match(/[a-z0-9]+$/)[0];
-  console.log(slug);
 
   const onGoBack = () => {
     history.push(location?.state?.from?.location ?? '/');
   };
 
+  const checkLocation = () => {
+    const { state } = location;
+    return state?.from ? state.from : '';
+  };
+
+  // const checkLocation = location?.state?.from ? state.from :'';
   return (
     <div>
       <button type="button" onClick={onGoBack} className={styles.button}>
         {location?.state?.from?.label ?? 'Go back to main page'}
       </button>
 
-      <div key={movie.id} className={styles.div}>
+      <div className={styles.div}>
         <div className={styles.movie_card}>
           <img
             className={styles.img}
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt={movie.title}
-          ></img>
+          />
 
           <div className={styles.movie_info}>
             <h2 className={styles.h2}>{movie.title}</h2>
             <p className={styles.p}> {movie.release_date}</p>
-            {movie.genres.map(genre => (
-              <ul className={styles.li}>
+            <ul className={styles.li}>
+              {movie.genres.map(genre => (
                 <li key={genre.id}>{genre.name}</li>
-              </ul>
-            ))}
+              ))}
+            </ul>
 
             <p className={styles.p}>{movie.overview}</p>
 
@@ -56,7 +61,7 @@ export default function MoviePageDetails({ movie }) {
                 className={styles.link}
                 to={{
                   pathname: `${url}/cast`,
-                  state: { from: location.state.from },
+                  state: { from: checkLocation() },
                 }}
               >
                 Cast
@@ -65,7 +70,7 @@ export default function MoviePageDetails({ movie }) {
                 className={styles.link}
                 to={{
                   pathname: `${url}/reviews`,
-                  state: { from: location.state.from },
+                  state: { from: checkLocation() },
                 }}
               >
                 Reviews
